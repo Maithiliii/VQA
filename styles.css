@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 👈 this instead of height */
+    margin: 0;
+    background-color: #f4f4f4;
+    flex-direction: column;
+    padding-top: 80px; /* 👈 gives space for header */
+}
+
+
+header {
+    width: 100%;
+    text-align: center;
+    background-color: #398fd6;
+    color: white;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.upload-container {
+    margin-bottom: 20px;
+}
+
+.upload-box {
+    display: inline-block;
+    padding: 20px;
+    background-color: #398fd6;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+#question-section input {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#ask-btn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#answer-section {
+    margin-top: 20px;
+}
+
+#ask-another-btn {
+    padding: 10px 20px;
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#uploaded-img {
+    max-width: 200px;
+    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.dashed-box {
+    border: 2px dashed #ddd;
+    padding: 20px;
+    width: 10cm;  /* Horizontal length */
+    height: 4cm;  /* Vertical height */
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto; /* THIS makes it center horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.dashed-box p {
+    margin: 0;
+    color: #888;
+}
+
+.hidden {
+    display: none;
+}
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #398fd6 0%, #66c3ff 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #66c3ff 0%, #398fd6 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+

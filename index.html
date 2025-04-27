@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Question Answering</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Visual Question Answering</h1>
+    </header>
+
+    <div class="container">
+        <h1>Upload Image and Ask a Question</h1>
+        
+        <!-- Form to upload image and ask a question -->
+        <form id="qa-form" enctype="multipart/form-data">
+            <div class="upload-container">
+                <!-- Drag-and-drop box -->
+                <div id="drag-drop-box" class="dashed-box">
+                    <p>Drag and drop an image here or click to select one manually.</p>
+                    <input type="file" id="image" name="image" accept="image/*" class="hidden" required>
+                </div>
+                
+                <br><br>
+                <!-- Button to process the uploaded image -->
+                <button type="button" id="process-btn" onclick="processImage()">Process</button>
+            </div>
+            
+            <!-- Display uploaded image -->
+            <div id="image-preview" style="display:none;">
+                <h3>Uploaded Image:</h3>
+                <img id="uploaded-img" src="" alt="Uploaded Image">
+            </div>
+
+            <div id="question-section">
+                <label for="question">Enter your question:</label><br>
+                <input type="text" id="question" name="question" required><br><br>
+            </div>
+            
+            <button type="submit" id="submit-btn">Submit Question</button>
+        </form>
+
+        <h3>Answer:</h3>
+        <p id="answer">No answer yet.</p>
+    </div>
+
+    <script>
+        // Process the image and display it
+        function processImage() {
+            var fileInput = document.getElementById('image');
+            var file = fileInput.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploaded-img').src = e.target.result;
+                    document.getElementById('image-preview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle form submission
+        $("#qa-form").on('submit', function(event) {
+            event.preventDefault();
+
+            // Create FormData object to handle file upload
+            var formData = new FormData(this);
+
+            // Send data to Flask backend
+            $.ajax({
+                url: '/ask_question',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Display the answer
+                    $("#answer").text(response.answer);
+                },
+                error: function(xhr, status, error) {
+                    var err = xhr.responseJSON;
+                    $("#answer").text("Error: " + err.error);
+                }
+            });
+        });
+
+        // Drag and drop functionality
+        const dropBox = document.getElementById("drag-drop-box");
+
+        dropBox.addEventListener("dragover", function(event) {
+            event.preventDefault();
+            dropBox.style.borderColor = "green"; // Highlight box on drag
+        });
+
+        dropBox.addEventListener("dragleave", function() {
+            dropBox.style.borderColor = "#ddd"; // Reset border when leaving the box
+        });
+
+        dropBox.addEventListener("drop", function(event) {
+            event.preventDefault();
+            dropBox.style.borderColor = "#ddd"; // Reset border
+
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('image').files = files;
+                processImage(); // Process image immediately
+            }
+        });
+
+        // Trigger file input when clicking on the dashed box
+        dropBox.addEventListener("click", function() {
+            document.getElementById('image').click();
+        });
+    </script>
+</body>
+</html>
