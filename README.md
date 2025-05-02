@@ -12,12 +12,15 @@ Backend: Python + Flask
 ML Model: dandelin/vilt-b32-finetuned-vqa (HuggingFace Transformers)  
 Libraries: Transformers, Torch, Pillow  
 
-Example Questions You Can Ask
-Image Type	Example Questions
-A person on a surfboard	What is the person doing?
-What sport is this?
-Musical instrument	What instrument is being played?
-How many strings does it have?
-Traffic or road scenes	How many road signs are there?
-What does the sign mean?
-Shopping scene	How many bags is the person holding?
+# Example Questions You Can Ask
+Image Type	                                                                     Example Questions
+A person on a surfboard	                                                         What sport is this?
+                                                                                 What is the person doing? 
+                                                                                  
+Musical instrument	                                                             What instrument is being played?
+                                                                                 How many strings does it have?
+                                                                                 
+Traffic or road scenes	                                                         How many road signs are there?
+                                                                                 What does the sign mean?
+                                                                                 
+Shopping scene	                                                                 How many bags is the person holding?
